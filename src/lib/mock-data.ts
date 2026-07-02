@@ -62,7 +62,9 @@ export interface Conversation {
   messages: WhatsAppMessage[];
 }
 export interface AppUser {
-  id: string; name: string; email: string; role: "Admin" | "Manager" | "Agent"; avatar: string; active: boolean;
+  id: string; name: string; email: string; role: "Owner" | "Staff"; avatar: string;
+  avatarUrl?: string; phone?: string; active: boolean; password: string;
+  lastLogin?: string; createdAt: string;
 }
 export interface NotificationItem {
   id: string; title: string; description: string; type: "info" | "success" | "warning" | "error";
