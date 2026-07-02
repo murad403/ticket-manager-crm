@@ -16,6 +16,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
+import { Route as AppUsersRouteImport } from './routes/_app.users'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
@@ -62,6 +63,11 @@ const AppWhatsappRoute = AppWhatsappRouteImport.update({
 const AppVenuesRoute = AppVenuesRouteImport.update({
   id: '/venues',
   path: '/venues',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppUsersRoute = AppUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
+  '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
   '/whatsapp': typeof AppWhatsappRoute
 }
@@ -169,6 +176,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
+  '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
   '/whatsapp': typeof AppWhatsappRoute
 }
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/_app/profile': typeof AppProfileRoute
   '/_app/reports': typeof AppReportsRoute
   '/_app/settings': typeof AppSettingsRoute
+  '/_app/users': typeof AppUsersRoute
   '/_app/venues': typeof AppVenuesRoute
   '/_app/whatsapp': typeof AppWhatsappRoute
 }
@@ -215,6 +224,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reports'
     | '/settings'
+    | '/users'
     | '/venues'
     | '/whatsapp'
   fileRoutesByTo: FileRoutesByTo
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reports'
     | '/settings'
+    | '/users'
     | '/venues'
     | '/whatsapp'
   id:
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/_app/profile'
     | '/_app/reports'
     | '/_app/settings'
+    | '/_app/users'
     | '/_app/venues'
     | '/_app/whatsapp'
   fileRoutesById: FileRoutesById
@@ -319,6 +331,13 @@ declare module '@tanstack/react-router' {
       path: '/venues'
       fullPath: '/venues'
       preLoaderRoute: typeof AppVenuesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/users': {
+      id: '/_app/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppUsersRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/settings': {
@@ -429,6 +448,7 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppReportsRoute: typeof AppReportsRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppUsersRoute: typeof AppUsersRoute
   AppVenuesRoute: typeof AppVenuesRoute
   AppWhatsappRoute: typeof AppWhatsappRoute
 }
@@ -447,6 +467,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppReportsRoute: AppReportsRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppUsersRoute: AppUsersRoute,
   AppVenuesRoute: AppVenuesRoute,
   AppWhatsappRoute: AppWhatsappRoute,
 }
