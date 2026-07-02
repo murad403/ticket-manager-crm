@@ -200,7 +200,6 @@ export const useAuth = create<AuthState>()(
       }),
       onRehydrateStorage: () => (state) => {
         state?.checkExpiry();
-        useAuth.setState({ hydrated: true });
       },
     }
   )
