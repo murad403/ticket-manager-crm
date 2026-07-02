@@ -18,6 +18,7 @@ import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
 import { Route as AppUsersRouteImport } from './routes/_app.users'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppRolesRouteImport } from './routes/_app.roles'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOrdersRouteImport } from './routes/_app.orders'
@@ -73,6 +74,11 @@ const AppUsersRoute = AppUsersRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRolesRoute = AppRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReportsRoute = AppReportsRouteImport.update({
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/orders': typeof AppOrdersRoute
   '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
+  '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
   '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/orders': typeof AppOrdersRoute
   '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
+  '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
   '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/_app/orders': typeof AppOrdersRoute
   '/_app/profile': typeof AppProfileRoute
   '/_app/reports': typeof AppReportsRoute
+  '/_app/roles': typeof AppRolesRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/users': typeof AppUsersRoute
   '/_app/venues': typeof AppVenuesRoute
@@ -223,6 +232,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/profile'
     | '/reports'
+    | '/roles'
     | '/settings'
     | '/users'
     | '/venues'
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/orders'
     | '/profile'
     | '/reports'
+    | '/roles'
     | '/settings'
     | '/users'
     | '/venues'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
     | '/_app/orders'
     | '/_app/profile'
     | '/_app/reports'
+    | '/_app/roles'
     | '/_app/settings'
     | '/_app/users'
     | '/_app/venues'
@@ -345,6 +357,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/roles': {
+      id: '/_app/roles'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof AppRolesRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/reports': {
@@ -447,6 +466,7 @@ interface AppRouteChildren {
   AppOrdersRoute: typeof AppOrdersRoute
   AppProfileRoute: typeof AppProfileRoute
   AppReportsRoute: typeof AppReportsRoute
+  AppRolesRoute: typeof AppRolesRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppUsersRoute: typeof AppUsersRoute
   AppVenuesRoute: typeof AppVenuesRoute
@@ -466,6 +486,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppOrdersRoute: AppOrdersRoute,
   AppProfileRoute: AppProfileRoute,
   AppReportsRoute: AppReportsRoute,
+  AppRolesRoute: AppRolesRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppUsersRoute: AppUsersRoute,
   AppVenuesRoute: AppVenuesRoute,
