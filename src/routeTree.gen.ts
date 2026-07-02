@@ -16,6 +16,8 @@ import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppEventsRouteImport } from './routes/_app.events'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCustomersRouteImport } from './routes/_app.customers'
+import { Route as AppBrokersRouteImport } from './routes/_app.brokers'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -51,9 +53,21 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCustomersRoute = AppCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBrokersRoute = AppBrokersRouteImport.update({
+  id: '/brokers',
+  path: '/brokers',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/brokers': typeof AppBrokersRoute
+  '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/brokers': typeof AppBrokersRoute
+  '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
@@ -72,6 +88,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/brokers': typeof AppBrokersRoute
+  '/_app/customers': typeof AppCustomersRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/events': typeof AppEventsRoute
   '/_app/inventory': typeof AppInventoryRoute
@@ -82,17 +100,29 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/brokers'
+    | '/customers'
     | '/dashboard'
     | '/events'
     | '/inventory'
     | '/orders'
     | '/venues'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/events' | '/inventory' | '/orders' | '/venues'
+  to:
+    | '/'
+    | '/brokers'
+    | '/customers'
+    | '/dashboard'
+    | '/events'
+    | '/inventory'
+    | '/orders'
+    | '/venues'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/brokers'
+    | '/_app/customers'
     | '/_app/dashboard'
     | '/_app/events'
     | '/_app/inventory'
@@ -156,10 +186,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/customers': {
+      id: '/_app/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof AppCustomersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/brokers': {
+      id: '/_app/brokers'
+      path: '/brokers'
+      fullPath: '/brokers'
+      preLoaderRoute: typeof AppBrokersRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppBrokersRoute: typeof AppBrokersRoute
+  AppCustomersRoute: typeof AppCustomersRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppEventsRoute: typeof AppEventsRoute
   AppInventoryRoute: typeof AppInventoryRoute
@@ -168,6 +214,8 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBrokersRoute: AppBrokersRoute,
+  AppCustomersRoute: AppCustomersRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppEventsRoute: AppEventsRoute,
   AppInventoryRoute: AppInventoryRoute,
