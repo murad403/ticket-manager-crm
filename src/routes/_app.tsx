@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_app")({
 
 function AppLayout() {
   const navigate = useNavigate();
-  const hydrated = useAuth((s) => s.hydrated);
+  const hydrated = useAuthHydrated();
   const session = useAuth((s) => s.session);
   const users = useAuth((s) => s.users);
   const touchSession = useAuth((s) => s.touchSession);
