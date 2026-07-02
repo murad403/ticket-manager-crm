@@ -21,6 +21,7 @@ import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppFinanceRouteImport } from './routes/_app.finance'
+import { Route as AppExpensesRouteImport } from './routes/_app.expenses'
 import { Route as AppEventsRouteImport } from './routes/_app.events'
 import { Route as AppDeliveryRouteImport } from './routes/_app.delivery'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
@@ -87,6 +88,11 @@ const AppFinanceRoute = AppFinanceRouteImport.update({
   path: '/finance',
   getParentRoute: () => AppRoute,
 } as any)
+const AppExpensesRoute = AppExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEventsRoute = AppEventsRouteImport.update({
   id: '/events',
   path: '/events',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AppDashboardRoute
   '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
+  '/expenses': typeof AppExpensesRoute
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AppDashboardRoute
   '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
+  '/expenses': typeof AppExpensesRoute
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
@@ -169,6 +177,7 @@ export interface FileRoutesById {
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/delivery': typeof AppDeliveryRoute
   '/_app/events': typeof AppEventsRoute
+  '/_app/expenses': typeof AppExpensesRoute
   '/_app/finance': typeof AppFinanceRoute
   '/_app/inventory': typeof AppInventoryRoute
   '/_app/orders': typeof AppOrdersRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/delivery'
     | '/events'
+    | '/expenses'
     | '/finance'
     | '/inventory'
     | '/orders'
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/delivery'
     | '/events'
+    | '/expenses'
     | '/finance'
     | '/inventory'
     | '/orders'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/_app/dashboard'
     | '/_app/delivery'
     | '/_app/events'
+    | '/_app/expenses'
     | '/_app/finance'
     | '/_app/inventory'
     | '/_app/orders'
@@ -332,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFinanceRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/expenses': {
+      id: '/_app/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof AppExpensesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/events': {
       id: '/_app/events'
       path: '/events'
@@ -384,6 +403,7 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppDeliveryRoute: typeof AppDeliveryRoute
   AppEventsRoute: typeof AppEventsRoute
+  AppExpensesRoute: typeof AppExpensesRoute
   AppFinanceRoute: typeof AppFinanceRoute
   AppInventoryRoute: typeof AppInventoryRoute
   AppOrdersRoute: typeof AppOrdersRoute
@@ -400,6 +420,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppDeliveryRoute: AppDeliveryRoute,
   AppEventsRoute: AppEventsRoute,
+  AppExpensesRoute: AppExpensesRoute,
   AppFinanceRoute: AppFinanceRoute,
   AppInventoryRoute: AppInventoryRoute,
   AppOrdersRoute: AppOrdersRoute,
