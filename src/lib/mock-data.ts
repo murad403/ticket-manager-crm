@@ -246,12 +246,13 @@ export const conversations: Conversation[] = customers.slice(0, 12).map((c, i) =
 });
 
 export const users: AppUser[] = [
-  { id: "usr_0001", name: "Alex Chen", email: "alex@ticketmanager.com", role: "Admin", avatar: "AC", active: true },
-  { id: "usr_0002", name: "Priya Rao", email: "priya@ticketmanager.com", role: "Manager", avatar: "PR", active: true },
-  { id: "usr_0003", name: "Marcus Bell", email: "marcus@ticketmanager.com", role: "Agent", avatar: "MB", active: true },
-  { id: "usr_0004", name: "Sofia Reyes", email: "sofia@ticketmanager.com", role: "Agent", avatar: "SR", active: true },
-  { id: "usr_0005", name: "Yuki Tanaka", email: "yuki@ticketmanager.com", role: "Agent", avatar: "YT", active: false },
+  { id: "usr_0001", name: "Alex Chen", email: "owner@ticketmanager.local", role: "Owner", avatar: "AC", phone: "+1 555 010 4224", active: true, password: "Owner@123", lastLogin: subDays(NOW, 0).toISOString(), createdAt: subDays(NOW, 320).toISOString() },
+  { id: "usr_0002", name: "Priya Rao", email: "staff@ticketmanager.local", role: "Staff", avatar: "PR", phone: "+1 555 010 7781", active: true, password: "Staff@123", lastLogin: subDays(NOW, 1).toISOString(), createdAt: subDays(NOW, 210).toISOString() },
+  { id: "usr_0003", name: "Marcus Bell", email: "marcus@ticketmanager.local", role: "Staff", avatar: "MB", phone: "+1 555 010 3390", active: true, password: "Staff@123", lastLogin: subDays(NOW, 3).toISOString(), createdAt: subDays(NOW, 150).toISOString() },
+  { id: "usr_0004", name: "Sofia Reyes", email: "sofia@ticketmanager.local", role: "Staff", avatar: "SR", phone: "+1 555 010 8842", active: true, password: "Staff@123", lastLogin: subDays(NOW, 5).toISOString(), createdAt: subDays(NOW, 96).toISOString() },
+  { id: "usr_0005", name: "Yuki Tanaka", email: "yuki@ticketmanager.local", role: "Staff", avatar: "YT", phone: "+1 555 010 1120", active: false, password: "Staff@123", lastLogin: subDays(NOW, 40).toISOString(), createdAt: subDays(NOW, 60).toISOString() },
 ];
+
 
 export const notifications: NotificationItem[] = [
   { id: "n1", title: "3 orders pending delivery", description: "Send passes via WhatsApp", type: "warning", read: false, timestamp: subDays(NOW, 0).toISOString() },
