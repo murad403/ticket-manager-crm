@@ -3,7 +3,7 @@ import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { TopBar, QuickCreate } from "@/components/layout/TopBar";
 import { AccessDenied } from "@/components/layout/AccessDenied";
-import { useAuth } from "@/store/auth-store";
+import { useAuth, useAuthHydrated } from "@/store/auth-store";
 import { canAccessRoute } from "@/lib/rbac";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
