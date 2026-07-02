@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
+import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppEventsRouteImport } from './routes/_app.events'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppVenuesRoute = AppVenuesRouteImport.update({
   id: '/venues',
   path: '/venues',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOrdersRoute = AppOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => AppRoute,
 } as any)
 const AppInventoryRoute = AppInventoryRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AppDashboardRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
+  '/orders': typeof AppOrdersRoute
   '/venues': typeof AppVenuesRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AppDashboardRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
+  '/orders': typeof AppOrdersRoute
   '/venues': typeof AppVenuesRoute
 }
 export interface FileRoutesById {
@@ -67,13 +75,20 @@ export interface FileRoutesById {
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/events': typeof AppEventsRoute
   '/_app/inventory': typeof AppInventoryRoute
+  '/_app/orders': typeof AppOrdersRoute
   '/_app/venues': typeof AppVenuesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/events' | '/inventory' | '/venues'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/events'
+    | '/inventory'
+    | '/orders'
+    | '/venues'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/events' | '/inventory' | '/venues'
+  to: '/' | '/dashboard' | '/events' | '/inventory' | '/orders' | '/venues'
   id:
     | '__root__'
     | '/'
@@ -81,6 +96,7 @@ export interface FileRouteTypes {
     | '/_app/dashboard'
     | '/_app/events'
     | '/_app/inventory'
+    | '/_app/orders'
     | '/_app/venues'
   fileRoutesById: FileRoutesById
 }
@@ -112,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVenuesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/orders': {
+      id: '/_app/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof AppOrdersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/inventory': {
       id: '/_app/inventory'
       path: '/inventory'
@@ -140,6 +163,7 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppEventsRoute: typeof AppEventsRoute
   AppInventoryRoute: typeof AppInventoryRoute
+  AppOrdersRoute: typeof AppOrdersRoute
   AppVenuesRoute: typeof AppVenuesRoute
 }
 
@@ -147,6 +171,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppEventsRoute: AppEventsRoute,
   AppInventoryRoute: AppInventoryRoute,
+  AppOrdersRoute: AppOrdersRoute,
   AppVenuesRoute: AppVenuesRoute,
 }
 
