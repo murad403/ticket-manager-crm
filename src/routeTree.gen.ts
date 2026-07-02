@@ -18,6 +18,7 @@ import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppFinanceRouteImport } from './routes/_app.finance'
@@ -71,6 +72,11 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
 const AppReportsRoute = AppReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
 const AppOrdersRoute = AppOrdersRouteImport.update({
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
+  '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
   '/venues': typeof AppVenuesRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
+  '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
   '/settings': typeof AppSettingsRoute
   '/venues': typeof AppVenuesRoute
@@ -181,6 +189,7 @@ export interface FileRoutesById {
   '/_app/finance': typeof AppFinanceRoute
   '/_app/inventory': typeof AppInventoryRoute
   '/_app/orders': typeof AppOrdersRoute
+  '/_app/profile': typeof AppProfileRoute
   '/_app/reports': typeof AppReportsRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/venues': typeof AppVenuesRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
     | '/finance'
     | '/inventory'
     | '/orders'
+    | '/profile'
     | '/reports'
     | '/settings'
     | '/venues'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/finance'
     | '/inventory'
     | '/orders'
+    | '/profile'
     | '/reports'
     | '/settings'
     | '/venues'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/_app/finance'
     | '/_app/inventory'
     | '/_app/orders'
+    | '/_app/profile'
     | '/_app/reports'
     | '/_app/settings'
     | '/_app/venues'
@@ -321,6 +333,13 @@ declare module '@tanstack/react-router' {
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/orders': {
@@ -407,6 +426,7 @@ interface AppRouteChildren {
   AppFinanceRoute: typeof AppFinanceRoute
   AppInventoryRoute: typeof AppInventoryRoute
   AppOrdersRoute: typeof AppOrdersRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppReportsRoute: typeof AppReportsRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppVenuesRoute: typeof AppVenuesRoute
@@ -424,6 +444,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFinanceRoute: AppFinanceRoute,
   AppInventoryRoute: AppInventoryRoute,
   AppOrdersRoute: AppOrdersRoute,
+  AppProfileRoute: AppProfileRoute,
   AppReportsRoute: AppReportsRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppVenuesRoute: AppVenuesRoute,
