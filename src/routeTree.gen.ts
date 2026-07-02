@@ -11,10 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
 import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppEventsRouteImport } from './routes/_app.events'
+import { Route as AppDeliveryRouteImport } from './routes/_app.delivery'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppCustomersRouteImport } from './routes/_app.customers'
 import { Route as AppBrokersRouteImport } from './routes/_app.brokers'
@@ -27,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppWhatsappRoute = AppWhatsappRouteImport.update({
+  id: '/whatsapp',
+  path: '/whatsapp',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppVenuesRoute = AppVenuesRouteImport.update({
   id: '/venues',
@@ -46,6 +53,11 @@ const AppInventoryRoute = AppInventoryRouteImport.update({
 const AppEventsRoute = AppEventsRouteImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDeliveryRoute = AppDeliveryRouteImport.update({
+  id: '/delivery',
+  path: '/delivery',
   getParentRoute: () => AppRoute,
 } as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
@@ -69,20 +81,24 @@ export interface FileRoutesByFullPath {
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
+  '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
   '/venues': typeof AppVenuesRoute
+  '/whatsapp': typeof AppWhatsappRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
+  '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
   '/venues': typeof AppVenuesRoute
+  '/whatsapp': typeof AppWhatsappRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -91,10 +107,12 @@ export interface FileRoutesById {
   '/_app/brokers': typeof AppBrokersRoute
   '/_app/customers': typeof AppCustomersRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/delivery': typeof AppDeliveryRoute
   '/_app/events': typeof AppEventsRoute
   '/_app/inventory': typeof AppInventoryRoute
   '/_app/orders': typeof AppOrdersRoute
   '/_app/venues': typeof AppVenuesRoute
+  '/_app/whatsapp': typeof AppWhatsappRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -103,20 +121,24 @@ export interface FileRouteTypes {
     | '/brokers'
     | '/customers'
     | '/dashboard'
+    | '/delivery'
     | '/events'
     | '/inventory'
     | '/orders'
     | '/venues'
+    | '/whatsapp'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/brokers'
     | '/customers'
     | '/dashboard'
+    | '/delivery'
     | '/events'
     | '/inventory'
     | '/orders'
     | '/venues'
+    | '/whatsapp'
   id:
     | '__root__'
     | '/'
@@ -124,10 +146,12 @@ export interface FileRouteTypes {
     | '/_app/brokers'
     | '/_app/customers'
     | '/_app/dashboard'
+    | '/_app/delivery'
     | '/_app/events'
     | '/_app/inventory'
     | '/_app/orders'
     | '/_app/venues'
+    | '/_app/whatsapp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -150,6 +174,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/whatsapp': {
+      id: '/_app/whatsapp'
+      path: '/whatsapp'
+      fullPath: '/whatsapp'
+      preLoaderRoute: typeof AppWhatsappRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/venues': {
       id: '/_app/venues'
@@ -177,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/events'
       fullPath: '/events'
       preLoaderRoute: typeof AppEventsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/delivery': {
+      id: '/_app/delivery'
+      path: '/delivery'
+      fullPath: '/delivery'
+      preLoaderRoute: typeof AppDeliveryRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/dashboard': {
@@ -207,20 +245,24 @@ interface AppRouteChildren {
   AppBrokersRoute: typeof AppBrokersRoute
   AppCustomersRoute: typeof AppCustomersRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppDeliveryRoute: typeof AppDeliveryRoute
   AppEventsRoute: typeof AppEventsRoute
   AppInventoryRoute: typeof AppInventoryRoute
   AppOrdersRoute: typeof AppOrdersRoute
   AppVenuesRoute: typeof AppVenuesRoute
+  AppWhatsappRoute: typeof AppWhatsappRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppBrokersRoute: AppBrokersRoute,
   AppCustomersRoute: AppCustomersRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppDeliveryRoute: AppDeliveryRoute,
   AppEventsRoute: AppEventsRoute,
   AppInventoryRoute: AppInventoryRoute,
   AppOrdersRoute: AppOrdersRoute,
   AppVenuesRoute: AppVenuesRoute,
+  AppWhatsappRoute: AppWhatsappRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
