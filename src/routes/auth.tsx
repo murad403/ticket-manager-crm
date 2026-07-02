@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useAuth } from "@/store/auth-store";
+import { useAuth, useAuthHydrated } from "@/store/auth-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,7 +26,7 @@ const DEMOS = [
 function AuthPage() {
   const navigate = useNavigate();
   const login = useAuth((s) => s.login);
-  const hydrated = useAuth((s) => s.hydrated);
+  const hydrated = useAuthHydrated();
   const isAuthenticated = useAuth((s) => s.isAuthenticated);
 
   const [email, setEmail] = useState("");
