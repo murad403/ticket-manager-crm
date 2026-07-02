@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { users as seedUsers, type AppUser } from "@/lib/mock-data";
@@ -204,3 +205,17 @@ export const useAuth = create<AuthState>()(
     }
   )
 );
+
+// Client-only hydration flag. Zustand persist with synchronous localStorage
+// rehydrates during store creation on the client, so by the time a component
+// mounts the state is already restored — we just flip `hydrated` once mounted.
+export function useAuthHydrated() {
+  const hydrated = useAuth((s) => s.hydrated);
+  useEffect(() => {
+    if (!useAuth.getState().hydrated) {
+      useAuth.getState().checkExpiry();
+      useAuth.setState({ hydrated: true });
+    }
+  }, []);
+  return hydrated;
+}
