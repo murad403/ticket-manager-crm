@@ -9,15 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppVenuesRouteImport } from './routes/_app.venues'
+import { Route as AppUsersRouteImport } from './routes/_app.users'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppRolesRouteImport } from './routes/_app.roles'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppOrdersRouteImport } from './routes/_app.orders'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppFinanceRouteImport } from './routes/_app.finance'
+import { Route as AppExpensesRouteImport } from './routes/_app.expenses'
 import { Route as AppEventsRouteImport } from './routes/_app.events'
 import { Route as AppDeliveryRouteImport } from './routes/_app.delivery'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
@@ -25,6 +32,21 @@ import { Route as AppCustomersRouteImport } from './routes/_app.customers'
 import { Route as AppBrokersRouteImport } from './routes/_app.brokers'
 import { Route as AppActivityRouteImport } from './routes/_app.activity'
 
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -44,14 +66,29 @@ const AppVenuesRoute = AppVenuesRouteImport.update({
   path: '/venues',
   getParentRoute: () => AppRoute,
 } as any)
+const AppUsersRoute = AppUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => AppRoute,
 } as any)
+const AppRolesRoute = AppRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppReportsRoute = AppReportsRouteImport.update({
   id: '/reports',
   path: '/reports',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => AppRoute,
 } as any)
 const AppOrdersRoute = AppOrdersRouteImport.update({
@@ -67,6 +104,11 @@ const AppInventoryRoute = AppInventoryRouteImport.update({
 const AppFinanceRoute = AppFinanceRouteImport.update({
   id: '/finance',
   path: '/finance',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExpensesRoute = AppExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEventsRoute = AppEventsRouteImport.update({
@@ -102,33 +144,47 @@ const AppActivityRoute = AppActivityRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/activity': typeof AppActivityRoute
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
+  '/expenses': typeof AppExpensesRoute
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
+  '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
+  '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
+  '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
   '/whatsapp': typeof AppWhatsappRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/activity': typeof AppActivityRoute
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
   '/dashboard': typeof AppDashboardRoute
   '/delivery': typeof AppDeliveryRoute
   '/events': typeof AppEventsRoute
+  '/expenses': typeof AppExpensesRoute
   '/finance': typeof AppFinanceRoute
   '/inventory': typeof AppInventoryRoute
   '/orders': typeof AppOrdersRoute
+  '/profile': typeof AppProfileRoute
   '/reports': typeof AppReportsRoute
+  '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
+  '/users': typeof AppUsersRoute
   '/venues': typeof AppVenuesRoute
   '/whatsapp': typeof AppWhatsappRoute
 }
@@ -136,17 +192,24 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/_app/activity': typeof AppActivityRoute
   '/_app/brokers': typeof AppBrokersRoute
   '/_app/customers': typeof AppCustomersRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/delivery': typeof AppDeliveryRoute
   '/_app/events': typeof AppEventsRoute
+  '/_app/expenses': typeof AppExpensesRoute
   '/_app/finance': typeof AppFinanceRoute
   '/_app/inventory': typeof AppInventoryRoute
   '/_app/orders': typeof AppOrdersRoute
+  '/_app/profile': typeof AppProfileRoute
   '/_app/reports': typeof AppReportsRoute
+  '/_app/roles': typeof AppRolesRoute
   '/_app/settings': typeof AppSettingsRoute
+  '/_app/users': typeof AppUsersRoute
   '/_app/venues': typeof AppVenuesRoute
   '/_app/whatsapp': typeof AppWhatsappRoute
 }
@@ -154,50 +217,71 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
+    | '/forgot-password'
+    | '/reset-password'
     | '/activity'
     | '/brokers'
     | '/customers'
     | '/dashboard'
     | '/delivery'
     | '/events'
+    | '/expenses'
     | '/finance'
     | '/inventory'
     | '/orders'
+    | '/profile'
     | '/reports'
+    | '/roles'
     | '/settings'
+    | '/users'
     | '/venues'
     | '/whatsapp'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
+    | '/forgot-password'
+    | '/reset-password'
     | '/activity'
     | '/brokers'
     | '/customers'
     | '/dashboard'
     | '/delivery'
     | '/events'
+    | '/expenses'
     | '/finance'
     | '/inventory'
     | '/orders'
+    | '/profile'
     | '/reports'
+    | '/roles'
     | '/settings'
+    | '/users'
     | '/venues'
     | '/whatsapp'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/auth'
+    | '/forgot-password'
+    | '/reset-password'
     | '/_app/activity'
     | '/_app/brokers'
     | '/_app/customers'
     | '/_app/dashboard'
     | '/_app/delivery'
     | '/_app/events'
+    | '/_app/expenses'
     | '/_app/finance'
     | '/_app/inventory'
     | '/_app/orders'
+    | '/_app/profile'
     | '/_app/reports'
+    | '/_app/roles'
     | '/_app/settings'
+    | '/_app/users'
     | '/_app/venues'
     | '/_app/whatsapp'
   fileRoutesById: FileRoutesById
@@ -205,10 +289,34 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -237,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVenuesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/users': {
+      id: '/_app/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AppUsersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/settings': {
       id: '/_app/settings'
       path: '/settings'
@@ -244,11 +359,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSettingsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/roles': {
+      id: '/_app/roles'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof AppRolesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/reports': {
       id: '/_app/reports'
       path: '/reports'
       fullPath: '/reports'
       preLoaderRoute: typeof AppReportsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/orders': {
@@ -270,6 +399,13 @@ declare module '@tanstack/react-router' {
       path: '/finance'
       fullPath: '/finance'
       preLoaderRoute: typeof AppFinanceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/expenses': {
+      id: '/_app/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof AppExpensesRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/events': {
@@ -324,11 +460,15 @@ interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppDeliveryRoute: typeof AppDeliveryRoute
   AppEventsRoute: typeof AppEventsRoute
+  AppExpensesRoute: typeof AppExpensesRoute
   AppFinanceRoute: typeof AppFinanceRoute
   AppInventoryRoute: typeof AppInventoryRoute
   AppOrdersRoute: typeof AppOrdersRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppReportsRoute: typeof AppReportsRoute
+  AppRolesRoute: typeof AppRolesRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppUsersRoute: typeof AppUsersRoute
   AppVenuesRoute: typeof AppVenuesRoute
   AppWhatsappRoute: typeof AppWhatsappRoute
 }
@@ -340,11 +480,15 @@ const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppDeliveryRoute: AppDeliveryRoute,
   AppEventsRoute: AppEventsRoute,
+  AppExpensesRoute: AppExpensesRoute,
   AppFinanceRoute: AppFinanceRoute,
   AppInventoryRoute: AppInventoryRoute,
   AppOrdersRoute: AppOrdersRoute,
+  AppProfileRoute: AppProfileRoute,
   AppReportsRoute: AppReportsRoute,
+  AppRolesRoute: AppRolesRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppUsersRoute: AppUsersRoute,
   AppVenuesRoute: AppVenuesRoute,
   AppWhatsappRoute: AppWhatsappRoute,
 }
@@ -354,6 +498,9 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
