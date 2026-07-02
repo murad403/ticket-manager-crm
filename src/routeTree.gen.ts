@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
@@ -26,6 +27,11 @@ import { Route as AppCustomersRouteImport } from './routes/_app.customers'
 import { Route as AppBrokersRouteImport } from './routes/_app.brokers'
 import { Route as AppActivityRouteImport } from './routes/_app.activity'
 
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -109,6 +115,7 @@ const AppActivityRoute = AppActivityRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/activity': typeof AppActivityRoute
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/activity': typeof AppActivityRoute
   '/brokers': typeof AppBrokersRoute
   '/customers': typeof AppCustomersRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/_app/activity': typeof AppActivityRoute
   '/_app/brokers': typeof AppBrokersRoute
   '/_app/customers': typeof AppCustomersRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/forgot-password'
     | '/activity'
     | '/brokers'
     | '/customers'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/forgot-password'
     | '/activity'
     | '/brokers'
     | '/customers'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/auth'
+    | '/forgot-password'
     | '/_app/activity'
     | '/_app/brokers'
     | '/_app/customers'
@@ -218,10 +230,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -375,6 +395,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
